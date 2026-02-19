@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@reference "tailwindcss/utilities";
+
+
+/* ---------- Custom Base Styles ---------- */
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-black text-white antialiased;
+}
+
+/* ---------- Reusable UI Classes ---------- */
+
+.btn-primary {
+  @apply bg-white hover:bg-zinc-200 text-black px-4 py-2 rounded-lg transition;
+}
+
+.btn-secondary {
+  @apply bg-zinc-900 hover:bg-zinc-800 text-white border border-zinc-700 px-4 py-2 rounded-lg transition;
+}
+
+.btn-danger {
+  @apply bg-zinc-100 hover:bg-zinc-300 text-black px-4 py-2 rounded-lg transition;
+}
+
+.card {
+  @apply bg-zinc-950 border border-zinc-800 rounded-xl shadow-sm;
+}
+
+.input {
+  @apply w-full bg-black border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-white;
+}
