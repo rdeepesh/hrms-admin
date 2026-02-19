@@ -1,75 +1,120 @@
-# React + TypeScript + Vite
+# HRMS Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern HRMS admin frontend built with React, TypeScript, and Vite. This app provides authenticated admin access to manage employees and attendance records through a REST API.
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This frontend is designed for HR/admin workflows and includes:
 
-## React Compiler
+- Admin login with protected routes
+- Dashboard with employee and attendance summary counts
+- Employee management (list, add, edit, delete)
+- Attendance management (mark attendance and view history)
+- API-driven data fetching with caching and automatic refresh
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Tech Stack
 
-Note: This will impact Vite dev & build performances.
+- React 19
+- TypeScript
+- Vite
+- React Router DOM
+- TanStack React Query
+- Axios
+- Tailwind CSS v4
+- Lucide React (icons)
+- React Hot Toast
+- date-fns
 
-## Expanding the ESLint configuration
+## Project Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js 18+ (recommended: latest LTS)
+- npm
+- Running backend API (default expected: `http://localhost:8000/api`)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Environment Variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create a `.env.local` file in the project root:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_API_URL=http://localhost:8000/api
 ```
+
+### Run Development Server
+
+```bash
+npm run dev
+```
+
+App runs on Vite default URL (typically `http://localhost:5173`).
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+### Lint
+
+```bash
+npm run lint
+```
+
+## Demo Admin Credentials
+
+Current demo credentials used in the app:
+
+- Email: `admin@hrms.com`
+- Password: `admin@hrms`
+
+These are currently hardcoded in `src/context/auth-context.ts` and are intended for assessment/demo use.
+
+## Main Routes
+
+- `/login` - Admin login page
+- `/` - Dashboard
+- `/employees` - Employee list
+- `/employees/add` - Add employee
+- `/attendance` - Attendance management
+
+## API Expectations
+
+The frontend expects these backend endpoints:
+
+- `GET /employees`
+- `POST /employees`
+- `DELETE /employees/:id`
+- `GET /attendance`
+- `POST /attendance`
+
+Base URL is controlled through `VITE_API_URL`.
+
+## Project Structure
+
+```text
+src/
+  api/          # Axios client and API modules
+  components/   # Layout, UI, and route guard components
+  context/      # Authentication context
+  hooks/        # React Query hooks
+  pages/        # Route pages (Dashboard, Employees, Attendance, Login)
+  types/        # TypeScript models
+```
+
+## Notes
+
+- Authentication is client-side for demo/assessment scope.
+- API requests use `withCredentials: true` in Axios client configuration.
